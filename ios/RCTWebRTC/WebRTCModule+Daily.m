@@ -80,9 +80,14 @@ RCT_EXPORT_METHOD(enableNoOpRecordingEnsuringBackgroundContinuity:(BOOL)enable) 
 // Expects to be invoked from captureSessionQueue
 - (AVCaptureSession *)configuredCaptureSession {
   AVCaptureSession *captureSession = [[AVCaptureSession alloc] init];
-  // Don't automatically configure application audio session, to prevent
-  // configuration "thrashing" once WebRTC audio unit takes the reins.
-  captureSession.automaticallyConfiguresApplicationAudioSession = NO;
+  // Note: we *used* to have the following line:
+  // captureSession.automaticallyConfiguresApplicationAudioSession = NO;
+  // The original reason for it was to "prevent configuration 'thrashing' once
+  // WebRTC audio unit takes the reins." As of 2023-08-23, I (kompfner) haven't
+  // observed any audio misbehavior as a result of removing this line. Keeping
+  // this line, on the other hand, was causing the no-op recording to error on
+  // start, which in turn meant that your app would not stay alive in the 
+  // background if you joined a call with your cam and mic initially off.
   AVCaptureDevice *audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
   if (!audioDevice) {
     return nil;
