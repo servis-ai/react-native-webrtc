@@ -13,8 +13,8 @@ type MediaDevicesEventMap = {
 
 class MediaDevices extends EventTarget<MediaDevicesEventMap> {
     constructor() {
-      super();
-      this._registerEvents();
+        super();
+        this._registerEvents();
     }
 
     /**
