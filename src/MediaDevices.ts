@@ -53,7 +53,7 @@ class MediaDevices extends EventTarget<MediaDevicesEventMap> {
         addListener(this,'mediaDevicesOnDeviceChange', () => {
             console.log('MediaDevices => mediaDevicesOnDeviceChange');
             // @ts-ignore
-            this.dispatchEvent(new RTCEvent('devicechange'));
+            this.dispatchEvent(new Event('devicechange'));
         });
     }
 }
