@@ -1,17 +1,17 @@
-
-import { defineCustomEventTarget } from 'event-target-shim';
+import { EventTarget, Event, defineEventAttribute } from 'event-target-shim';
 import { NativeModules } from 'react-native';
 
 import { addListener } from './EventEmitter';
-import RTCEvent from './RTCEvent';
 import getDisplayMedia from './getDisplayMedia';
 import getUserMedia from './getUserMedia';
 
 const { WebRTCModule } = NativeModules;
 
-const MEDIA_DEVICES_EVENTS = [ 'devicechange' ];
+type MediaDevicesEventMap = {
+    devicechange: Event<'devicechange'>
+}
 
-class MediaDevices extends defineCustomEventTarget(...MEDIA_DEVICES_EVENTS) {
+class MediaDevices extends EventTarget<MediaDevicesEventMap> {
     constructor() {
         super();
         this._registerEvents();
@@ -53,9 +53,17 @@ class MediaDevices extends defineCustomEventTarget(...MEDIA_DEVICES_EVENTS) {
         addListener(this,'mediaDevicesOnDeviceChange', () => {
             console.log('MediaDevices => mediaDevicesOnDeviceChange');
             // @ts-ignore
-            this.dispatchEvent(new RTCEvent('devicechange'));
+            this.dispatchEvent(new Event('devicechange'));
         });
     }
 }
+
+/**
+ * Define the `onxxx` event handlers.
+ */
+const proto = MediaDevices.prototype;
+
+defineEventAttribute(proto, 'devicechange');
+
 
 export default new MediaDevices();

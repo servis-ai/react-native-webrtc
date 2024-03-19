@@ -4,6 +4,8 @@ Starting with React Native 0.60 due to a new auto linking feature you no longer 
 
 See a sample app in the `examples/GumTestApp` directory.  
 
+**IMPORTANT:** Android API level >= 24 are supported.
+
 ## Declaring Permissions
 
 In `android/app/src/main/AndroidManifest.xml` add the following permissions before the `<application>` section.  
@@ -62,6 +64,14 @@ In `android/app/main/AndroidManifest.xml` add the following inside the `<applica
 	android:foregroundServiceType="mediaProjection|camera|microphone" />
 ```
 
+Additionally, add the respective foreground service type permissions before the `<application>` section.
+
+```xml
+<uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION" />
+<uses-permission android:name="android.permission.FOREGROUND_SERVICE_CAMERA" />
+<uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
+```
+
 The following will create an ongoing persistent notification which also comes with a foreground service.  
 You will be prompted for permissions automatically each time you want to initialise screen capturing.  
 A notification channel is also required and created.  
@@ -102,8 +112,8 @@ try {
 };
 ```
 
-Lastly you'll need to add this to your projects main `index.js` file.  
-Otherwise you'll receive errors relating to the foreground service not being registered correctly.  
+Lastly, you'll need to add this to your project's main `index.js` file.  
+Otherwise, you'll receive errors relating to the foreground service not being registered correctly.  
 
 ```javascript
 notifee.registerForegroundService( notification => {
@@ -169,7 +179,7 @@ java.lang.Thread in run at line 764
 
 From a more specific [similar Error](https://github.com/msgpack/msgpack-java/issues/516) explaining FloatBuffer change in java 8 and in java 11.
 
-We verifying that the jar files in android/libs/ are compiled for JRE11 (Major version 55), 
+We are verifying that the jar files in android/libs/ are compiled for JRE11 (Major version 55), 
 
 We think that the library being compiled against the JRE 11 runtime and osVersion 9 seems to use the Java 8 context where the classByteBuffer inherits the position method from Buffer and has a return type of java.nio.Buffer. 
 (On Java 11 the method is overridden with an implementation that returns java.nio.ByteBuffer.)
