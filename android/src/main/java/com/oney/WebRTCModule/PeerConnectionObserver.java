@@ -254,10 +254,10 @@ class PeerConnectionObserver implements PeerConnection.Observer {
     }
 
     public void senderGetStats(String senderId, Promise promise) {
-        RtpReceiver targetSender = null;
-        for (RtpReceiver r : peerConnection.getReceivers()) {
-            if (r.id().equals(senderId)) {
-                targetSender = r;
+        RtpSender targetSender = null;
+        for (RtpSender s : this.peerConnection.getSenders()) {
+            if (s.id().equals(senderId)) {
+                targetSender = s;
                 break;
             }
         }
