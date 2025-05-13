@@ -9,6 +9,7 @@
       "jsx": "react-native",
       "resolveJsonModule": true,
       "noImplicitAny": false,
+      "types": ["react", "react-native", "debug"]
     },
     "exclude": ["node_modules"]
 }
