@@ -70,13 +70,8 @@ class GetUserMediaImpl {
         }
 
         if (camera2supported) {
-            if (UVCCamera2Enumerator.isSupported(reactContext)) {
-                Log.d(TAG, "Creating video capturer using Camera2 API with UVC support.");
-                cameraEnumerator = new UVCCamera2Enumerator(reactContext);
-            } else {
-                Log.d(TAG, "Creating video capturer using Camera2 API.");
-                cameraEnumerator = new Camera2Enumerator(reactContext);
-            }
+            Log.d(TAG, "Creating video capturer using Camera2 API.");
+            cameraEnumerator = new Camera2Enumerator(reactContext);
         } else {
             Log.d(TAG, "Creating video capturer using Camera1 API.");
             cameraEnumerator = new Camera1Enumerator(false);
