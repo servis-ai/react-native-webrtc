@@ -1,14 +1,14 @@
 {
-  "name": "@daily-co/react-native-webrtc",
-  "version": "118.0.3-daily.4",
+  "name": "@servis-ai/react-native-webrtc",
+  "version": "118.0.3-servis-ai.1",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/daily-co/react-native-webrtc.git"
+    "url": "git+https://github.com/servis-ai/react-native-webrtc.git"
   },
   "nativePackage": true,
-  "description": "Daily fork of WebRTC for React Native",
+  "description": "Servis.ai fork of WebRTC for React Native",
   "license": "MIT",
-  "homepage": "https://github.com/daily-co/react-native-webrtc",
+  "homepage": "https://github.com/servis-ai/react-native-webrtc",
   "keywords": [
     "react-component",
     "react-native",
@@ -36,7 +36,7 @@
     "format": "tools/format.sh"
   },
   "bugs": {
-    "url": "https://github.com/daily-co/react-native-webrtc/issues"
+    "url": "https://github.com/servis-ai/react-native-webrtc/issues"
   },
   "devDependencies": {
     "@types/debug": "4.1.7",
